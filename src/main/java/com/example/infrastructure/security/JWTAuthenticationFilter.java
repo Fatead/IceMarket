@@ -35,7 +35,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,HttpServletResponse response) throws AuthenticationException {
         // 从输入流中获取到登录的信息
         // 创建一个token并调用authenticationManager.authenticate() 让Spring security进行验证
-        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getParameter("username"),request.getParameter("password")));
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getParameter("userName"),request.getParameter("password")));
     }
 
     /**

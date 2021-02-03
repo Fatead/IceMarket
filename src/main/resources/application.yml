@@ -24,3 +24,7 @@ mybatis-plus:
       # 删除后
       logic-delete-value: 0
 
+logging:
+  level:
+    com.itheima.canal: info
+  config: classpath:logback_spring.xml
