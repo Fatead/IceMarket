@@ -13,7 +13,7 @@ public class JwtTokenUtil {
     // Token请求头
     public static final String TOKEN_HEADER = "Authorization";
     // Token前缀
-    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String TOKEN_PREFIX = "Bearer";
     // 签名主题
     public static final String SUBJECT = "piconjo";
     // 过期时间
