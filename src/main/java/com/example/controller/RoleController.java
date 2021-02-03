@@ -1,7 +1,6 @@
 package com.example.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,16 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author vicente
- * @since 2021-02-02
+ * @since 2021-02-03
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
-
-
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello spring security";
-    }
+@RequestMapping("/role")
+public class RoleController {
 
 }
