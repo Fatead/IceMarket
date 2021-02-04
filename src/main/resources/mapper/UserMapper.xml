@@ -7,13 +7,8 @@
         <id column="user_id" property="userId" />
         <result column="user_name" property="userName" />
         <result column="password" property="password" />
-        <result column="age" property="age" />
-        <result column="gender" property="gender" />
         <result column="mail" property="mail" />
-        <result column="phone_number" property="phoneNumber" />
-        <result column="address" property="address" />
         <result column="nick_name" property="nickName" />
-        <result column="user_type" property="userType" />
     </resultMap>
 
 </mapper>

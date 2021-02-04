@@ -20,7 +20,7 @@ public class UserMapperTest {
 
     @Test
     public void addUserTest(){
-        User user = User.builder().userName("李四").age(20).mail("123@qq.com").password("123").address("somewhere").gender("male").phoneNumber("1231").build();
+        User user = User.builder().userName("李四").mail("123@qq.com").password("123").build();
         userMapper.insert(user);
     }
 

@@ -1,6 +1,7 @@
 package com.example.service;
 
-import com.example.dto.RegisterDTO;
+import com.example.dto.user.UserRegisterReqDTO;
+import com.example.dto.user.UserUpdateReqDTO;
 import com.example.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,10 +18,12 @@ import org.springframework.cache.annotation.Cacheable;
 public interface UserService extends IService<User> {
 
 
-    public User register(RegisterDTO registerDTO);
-
+    public User register(UserRegisterReqDTO userRegisterReqDTO);
 
     @Cacheable(value = "my-redis-cache2",key = "#userName")
     public User getUserByName(String userName);
+
+    public boolean updateUserInfo(UserUpdateReqDTO updateReqDTO);
+
 
 }

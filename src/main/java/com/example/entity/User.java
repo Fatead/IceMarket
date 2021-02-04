@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -21,31 +19,25 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User extends Model<User> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Integer userId;
+
 
     private String userName;
 
     private String password;
 
-    private Integer age;
-
-    private String gender;
-
     private String mail;
-
-    private String phoneNumber;
-
-    private String address;
 
     private String nickName;
 
-    private Integer userType;
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Integer userId;
 
 
     @Override

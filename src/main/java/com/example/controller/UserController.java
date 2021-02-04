@@ -1,7 +1,9 @@
 package com.example.controller;
 
 
-import com.example.dto.RegisterDTO;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.example.dto.user.UserRegisterReqDTO;
+import com.example.dto.user.UserUpdateReqDTO;
 import com.example.entity.User;
 import com.example.infrastructure.exception.UserNameRegisteredException;
 import com.example.service.UserService;
@@ -32,12 +34,23 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO){
-        User user = userService.register(registerDTO);
+    public ResponseEntity<User> register(@RequestBody UserRegisterReqDTO userRegisterReqDTO){
+        User user = userService.register(userRegisterReqDTO);
         if(user!=null){
             return ResponseEntity.ok(user);
         }else {
-            throw new UserNameRegisteredException(registerDTO.getUserName());
+            throw new UserNameRegisteredException(userRegisterReqDTO.getUserName());
+        }
+    }
+
+    @ApiOperation("用户信息修改")
+    @PostMapping("/alter")
+    public ResponseEntity<String> alterUserInfo(@RequestBody UserUpdateReqDTO userUpdateReqDTO){
+        boolean result = userService.updateUserInfo(userUpdateReqDTO);
+        if(result){
+            return ResponseEntity.ok("更新成功");
+        }else {
+            return ResponseEntity.ok("更新失败");
         }
     }
 

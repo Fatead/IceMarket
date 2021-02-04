@@ -2,8 +2,11 @@ package com.example.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.dto.RegisterDTO;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.example.dto.user.UserRegisterReqDTO;
+import com.example.dto.user.UserUpdateReqDTO;
 import com.example.entity.User;
+import com.example.infrastructure.convert.UserConvert;
 import com.example.mapper.UserMapper;
 import com.example.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -29,22 +32,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Override
-    public User register(RegisterDTO registerDTO) {
+    public User register(UserRegisterReqDTO userRegisterReqDTO) {
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        log.info("UserServiceImpl#register:[{}]", JSON.toJSONString(registerDTO));
-        User user = userMapper.selectOne(userQueryWrapper.eq("user_name",registerDTO.getUserName()));
+        log.info("UserServiceImpl#register:[{}]", JSON.toJSONString(userRegisterReqDTO));
+        User user = userMapper.selectOne(userQueryWrapper.eq("user_name", userRegisterReqDTO.getUserName()));
         if(user != null){
             log.warn("用户已存在");
             return null;
         }else {
             log.info("注册成功");
-            User saveUser = User.builder().
-                    userName(registerDTO.getUserName()).
-                    userType(2).
-                    age(registerDTO.getAge()).
-                    password(registerDTO.getPassword()).
-                    address(registerDTO.getAddress()).
-                    mail(registerDTO.getEmail()).build();
+            User saveUser = UserConvert.INSTANCE.convert(userRegisterReqDTO);
             userMapper.insert(saveUser);
             return saveUser;
         }
@@ -59,6 +56,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User getUserByName(String userName){
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         return userMapper.selectOne(userQueryWrapper.eq("user_name",userName));
+    }
+
+    @Override
+    public boolean updateUserInfo(UserUpdateReqDTO updateReqDTO) {
+        User user = User.builder().userName(updateReqDTO.getUserName()).build();
+        if(user!=null){
+            UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("user_name",updateReqDTO.getUserName());
+            updateWrapper.set("mail",updateReqDTO.getMail());
+            updateWrapper.set("password",updateReqDTO.getPassword());
+            updateWrapper.set("nick_name",updateReqDTO.getNickName());
+            userMapper.update(user,updateWrapper);
+            return true;
+        }else {
+            log.error("UserServiceImpl#alterUserInfo user[{}] not existed",JSON.toJSONString(updateReqDTO));
+            return false;
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.example.DemoApplication;
-import com.example.dto.RegisterDTO;
+import com.example.dto.user.UserRegisterReqDTO;
 import com.example.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,10 +34,10 @@ public class UserServiceTest {
 
     @Test
     public void registerTest(){
-        RegisterDTO registerDTO = RegisterDTO.builder().userName("324123").
+        UserRegisterReqDTO userRegisterReqDTO = UserRegisterReqDTO.builder().userName("324123").
                 nickName("Tom")
                 .build();
-        userService.register(registerDTO);
+        userService.register(userRegisterReqDTO);
     }
 
     @Test
