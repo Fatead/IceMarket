@@ -6,3 +6,4 @@
 + MyBatis-Plus实现ORM
 + Spring Security + JWT实现登录和权限控制
 + lombok实现log信息
++ 利用Redis实现数据缓存，实现整合Redis操作的RedisService

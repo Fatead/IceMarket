@@ -40,4 +40,10 @@ public class UserServiceTest {
         userService.register(registerDTO);
     }
 
+    @Test
+    public void getUserByNameTest(){
+        User user =  userService.getUserByName("12345");
+        System.out.println(user);
+    }
+
 }

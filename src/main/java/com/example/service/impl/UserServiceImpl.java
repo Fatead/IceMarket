@@ -8,6 +8,7 @@ import com.example.mapper.UserMapper;
 import com.example.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,6 +48,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userMapper.insert(saveUser);
             return saveUser;
         }
+    }
+
+    /**
+     * 使用@Cacheable开启Redis缓存
+     * @param userName
+     * @return
+     */
+    @Cacheable(value = "my-redis-cache2",key = "#userName")
+    public User getUserByName(String userName){
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        return userMapper.selectOne(userQueryWrapper.eq("user_name",userName));
     }
 
 }
