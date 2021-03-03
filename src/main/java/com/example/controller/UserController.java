@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @ApiOperation("用户信息修改")
-    @PostMapping("/alter")
+    @PostMapping("/update")
     public ResponseEntity<String> alterUserInfo(@RequestBody UserUpdateReqDTO userUpdateReqDTO){
         boolean result = userService.updateUserInfo(userUpdateReqDTO);
         if(result){

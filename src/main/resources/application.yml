@@ -39,3 +39,8 @@ logging:
   level:
     com.itheima.canal: info
   config: classpath:logback_spring.xml
+
+
+zookeeper:
+  address: 127.0.0.1:2181
+  timeout: 4000

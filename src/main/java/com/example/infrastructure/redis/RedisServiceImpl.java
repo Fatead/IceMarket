@@ -2,6 +2,7 @@ package com.example.infrastructure.redis;
 
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  * THashKey 哈希键
  * TValue 值
  */
+@Service
 public class RedisServiceImpl<THashKey,TValue> implements RedisService<THashKey,TValue> {
 
     private RedisTemplate<String,TValue> redisTemplate;
